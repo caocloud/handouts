@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Cleans names of a data.frame.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for clean_names {janitor}"><tr><td>clean_names {janitor}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Cleans names of a data.frame.</h2>
+
+<h3>Description</h3>
+
+<p>Resulting names are unique and consist only of the <code>_</code> character, numbers, and letters.
+Capitalization preferences can be specified using the <code>case</code> parameter.
+</p>
+<p>Accented characters are
+transliterated to ASCII.  For example, an &quot;o&quot; with a German umlaut over it becomes &quot;o&quot;, and the Spanish character &quot;enye&quot; becomes &quot;n&quot;.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+clean_names(dat, case = c("snake", "lower_camel", "upper_camel",
+  "screaming_snake", "lower_upper", "upper_lower", "all_caps", "small_camel",
+  "big_camel", "old_janitor", "parsed", "mixed"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dat</code></td>
+<td>
+<p>the input data.frame.</p>
+</td></tr>
+<tr valign="top"><td><code>case</code></td>
+<td>
+<p>The desired target case (default is <code>"snake"</code>), indicated by these possible values:
+</p>
+
+<ul>
+<li><p><code>"snake"</code> produces snake_case
+</p>
+</li>
+<li><p><code>"lower_camel"</code> or <code>"small_camel"</code> produces lowerCamel
+</p>
+</li>
+<li><p><code>"upper_camel"</code> or <code>"big_camel"</code> produces UpperCamel
+</p>
+</li>
+<li><p><code>"screaming_snake"</code> or <code>"all_caps"</code> produces ALL_CAPS
+</p>
+</li>
+<li><p><code>"lower_upper"</code> produces lowerUPPER
+</p>
+</li>
+<li><p><code>"upper_lower"</code> produces UPPERlower
+</p>
+</li>
+<li><p><code>old_janitor</code>: legacy compatibility option to preserve behavior of <code>clean_names</code> prior to addition of the &quot;case&quot; argument(janitor versions &lt;= 0.3.1 ).  Provided as a quick fix for old scripts broken by the changes to <code>clean_names</code> in janitor v1.0.
+</p>
+</li>
+<li><p><code>"parsed"</code>, <code>"mixed"</code>, <code>"none"</code>, <code>"internal_parsing"</code>: less-common cases offered by <code>snakecase::to_any_case</code>.  See <code><a href="../../snakecase/html/to_any_case.html">to_any_case</a></code> for details.
+</p>
+</li></ul>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns the data.frame with clean names.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# not run:
+# clean_names(poorly_named_df)
+
+# or pipe in the input data.frame:
+# poorly_named_df %&gt;% clean_names()
+
+# if you prefer camelCase variable names:
+# poorly_named_df %&gt;% clean_names(., "small_camel")
+
+# not run:
+# library(readxl)
+# readxl("messy_excel_file.xlsx") %&gt;% clean_names()
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>janitor</em> version 1.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

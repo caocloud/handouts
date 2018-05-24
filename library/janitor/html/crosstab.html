@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Generate a crosstabulation of two vectors.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for crosstab {janitor}"><tr><td>crosstab {janitor}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Generate a crosstabulation of two vectors.</h2>
+
+<h3>Description</h3>
+
+<p>This function is deprecated, use <code>tabyl(dat, var1, var2)</code> instead.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+crosstab(...)
+
+## Default S3 method:
+crosstab(vec1, vec2, percent = "none", show_na = TRUE,
+  ...)
+
+## S3 method for class 'data.frame'
+crosstab(.data, ...)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>additional arguments, if calling <code>crosstab</code> on a data.frame.</p>
+</td></tr>
+<tr valign="top"><td><code>vec1</code></td>
+<td>
+<p>the vector to place on the crosstab column.  If supplying a data.frame, this should be an unquoted column name.</p>
+</td></tr>
+<tr valign="top"><td><code>vec2</code></td>
+<td>
+<p>the vector to place on the crosstab row.  If supplying a data.frame, this should be an unquoted column name.</p>
+</td></tr>
+<tr valign="top"><td><code>percent</code></td>
+<td>
+<p>which grouping to use for percentages, if desired (defaults to &quot;none&quot;, which returns simple counts).  Must be one of &quot;none&quot;, &quot;row&quot;, &quot;col&quot;, or &quot;all&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>show_na</code></td>
+<td>
+<p>a logical value indicating whether counts should be displayed where either variable is <code>NA</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>.data</code></td>
+<td>
+<p>(optional) a data.frame, in which case <code>vec1</code> and <code>vec2</code> should be unquoted column names.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns a data.frame with the frequencies of the crosstabulated variables.
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>janitor</em> version 1.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>

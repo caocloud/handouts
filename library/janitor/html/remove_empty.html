@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Remove empty rows and/or columns from a data.frame.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for remove_empty {janitor}"><tr><td>remove_empty {janitor}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Remove empty rows and/or columns from a data.frame.</h2>
+
+<h3>Description</h3>
+
+<p>Removes all rows and/or columns from a data.frame that are composed entirely of <code>NA</code> values.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+remove_empty(dat, which = c("rows", "cols"))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>dat</code></td>
+<td>
+<p>the input data.frame.</p>
+</td></tr>
+<tr valign="top"><td><code>which</code></td>
+<td>
+<p>one of &quot;rows&quot;, &quot;cols&quot;, or <code>c("rows", "cols")</code>.  Where no value of which is provided, defaults to removing both empty rows and empty columns, declaring the behavior with a printed message.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Returns the data.frame without its missing rows or columns.
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+# not run:
+# dat %&gt;% remove_empty("rows")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>janitor</em> version 1.0.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
