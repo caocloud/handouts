@@ -1,11 +1,6 @@
 Package: handoutfunct
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Check packages in local directory and adverse event summary
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
-Encoding: UTF-8
-LazyData: true
+Author: Van Cao and members in Biostatistics group - OUCRU-VN
+Maintainer: Van Cao <caocloud.bt@gmail.com>
