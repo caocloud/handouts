@@ -16,12 +16,12 @@ check.packages <- function(x){
 
   for( i in x ){
     #  require returns TRUE invisibly if it was able to load package
-    if( !require( i , character.only = TRUE, lib.loc = .libPaths()[2] ) ){
+    if( !require( i , character.only = TRUE, lib.loc = myPaths[2] ) ){
       j<- paste("rlib/",i,".tar.gz",sep="")
       #  If package was not able to be loaded then re-install
-      install.packages( j , dependencies = TRUE , repos = NULL,type="source", lib = .libPaths()[2])
+      install.packages( j , dependencies = TRUE , repos = NULL,type="source", lib = myPaths[2])
       #  Load package after installing
-      require( i , character.only = TRUE, lib.loc = .libPaths()[2] )
+      require( i , character.only = TRUE, lib.loc = myPaths[2] )
     }
   }
 }
