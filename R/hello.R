@@ -29,29 +29,29 @@ check.packages <- function(x){
 
 ## Adverse event summary
 
-mySummary.ae <- function(ae,arm=as.factor(ae$arm)){
+mySummary.ae <- function(ae,arm=as.factor(ae$arm),var=ae$AE,SUBJID="SUBJID"){
   require(tidyverse)
   require(flextable)
-  ae.name<- sort(unique(ae$AE))
-  ae.name<- c("Any adverse event",ae.name)
+  ae.name<- sort(unique(var))
+  ae.name<- c("Any events",ae.name)
 
   gr.lev <- levels(arm)
   n.1 <- sum(arm==gr.lev[1])
   n.2 <- sum(arm==gr.lev[2])
 
-  ae.count<- data.frame("ae.name"=ae.name,"Group1.n.pt"=rep(NA,length(ae.name)),"Group1.n.ae"=rep(NA,length(ae.name)),
-                        "Group2.n.pt"=rep(NA,length(ae.name)),"Group2.n.ae"=rep(NA,length(ae.name)), stringsAsFactors = FALSE)
+  ae.count<- data.frame("ae.name"=ae.name,"Group1.n.pt"=rep(NA,length(ae.name)),"Group1.n.e"=rep(NA,length(ae.name)),
+                        "Group2.n.pt"=rep(NA,length(ae.name)),"Group2.n.e"=rep(NA,length(ae.name)), stringsAsFactors = FALSE)
 
-  ae.count$Group1.n.pt[1]<- ae %>% filter(arm==gr.lev[1] & AE %in% ae.name) %>% select(SUBJID) %>% n_distinct()
-  ae.count$Group1.n.ae[1]<- ae %>% filter(arm==gr.lev[1] & AE %in% ae.name) %>% select(SUBJID) %>% nrow()
-  ae.count$Group2.n.pt[1]<- ae %>% filter(arm==gr.lev[2] & AE %in% ae.name) %>% select(SUBJID) %>% n_distinct()
-  ae.count$Group2.n.ae[1]<- ae %>% filter(arm==gr.lev[2] & AE %in% ae.name) %>% select(SUBJID) %>% nrow()
+  ae.count$Group1.n.pt[1]<- ae %>% filter(arm==gr.lev[1] & var %in% ae.name) %>% select(SUBJID) %>% n_distinct()
+  ae.count$Group1.n.e[1]<- ae %>% filter(arm==gr.lev[1] & var %in% ae.name) %>% select(SUBJID) %>% nrow()
+  ae.count$Group2.n.pt[1]<- ae %>% filter(arm==gr.lev[2] & var %in% ae.name) %>% select(SUBJID) %>% n_distinct()
+  ae.count$Group2.n.e[1]<- ae %>% filter(arm==gr.lev[2] & var %in% ae.name) %>% select(SUBJID) %>% nrow()
 
   for (i in 2:length(ae.name)) {
-    ae.count$Group1.n.pt[i]<- ae %>% filter(arm==gr.lev[1]& AE==ae.name[i]) %>% select(SUBJID) %>% n_distinct()
-    ae.count$Group1.n.ae[i]<- ae %>% filter(arm==gr.lev[1]& AE==ae.name[i]) %>% select(SUBJID) %>% nrow()
-    ae.count$Group2.n.pt[i]<- ae %>% filter(arm==gr.lev[2]& AE==ae.name[i]) %>% select(SUBJID) %>% n_distinct()
-    ae.count$Group2.n.ae[i]<- ae %>% filter(arm==gr.lev[2]& AE==ae.name[i]) %>% select(SUBJID) %>% nrow()
+    ae.count$Group1.n.pt[i]<- ae %>% filter(arm==gr.lev[1]& var==ae.name[i]) %>% select(SUBJID) %>% n_distinct()
+    ae.count$Group1.n.e[i]<- ae %>% filter(arm==gr.lev[1]& var==ae.name[i]) %>% select(SUBJID) %>% nrow()
+    ae.count$Group2.n.pt[i]<- ae %>% filter(arm==gr.lev[2]& var==ae.name[i]) %>% select(SUBJID) %>% n_distinct()
+    ae.count$Group2.n.e[i]<- ae %>% filter(arm==gr.lev[2]& var==ae.name[i]) %>% select(SUBJID) %>% nrow()
   }
 
   for (i in 1:length(ae.name)){
@@ -70,26 +70,20 @@ mySummary.ae <- function(ae,arm=as.factor(ae$arm)){
 
   ae.table<- regulartable(ae.count)
 
-  # bold header
-  ae.table<- bold(ae.table,part="header")
-
-  # change background color
-  ae.table<- bg(ae.table, bg="lightblue", part="body")
-  ae.table<- bg(ae.table, bg="#E4C994", part="header")
-
   # text alignment
   ae.table<- align(ae.table, align= "center", part= "all")
 
   # add header
-  ae.table<- set_header_labels(ae.table,Group1.n.pt= paste(gr.lev[1],"(n=",n.1,")",sep=""), Group1.n.ae=paste(gr.lev[1],"(n=",n.1,")",sep=""),Group2.n.pt=paste(gr.lev[2],"(n=",n.2,")",sep=""), Group2.n.ae=paste(gr.lev[2],"(n=",n.2,")",sep="") )
+  ae.table<- set_header_labels(ae.table,Group1.n.pt= paste(gr.lev[1],"(n=",n.1,")",sep=""), Group1.n.e=paste(gr.lev[1],"(n=",n.1,")",sep=""),Group2.n.pt=paste(gr.lev[2],"(n=",n.2,")",sep=""), Group2.n.e=paste(gr.lev[2],"(n=",n.2,")",sep="") )
 
-  ae.table<- add_header(ae.table,ae.name="ae.name",Group1.n.pt="n.pt", Group1.n.ae="n.ae",Group2.n.pt="n.pt", Group2.n.ae="n.ae",p.value="p.value", top=FALSE)
-
+  ae.table<- add_header(ae.table,ae.name="ae.name",Group1.n.pt="n.pt", Group1.n.e="n.ae",Group2.n.pt="n.pt", Group2.n.e="n.ae",p.value="p.value", top=FALSE)
+  
 
   ## merge identical cells
   ae.table<- merge_h(ae.table, part="header")
   ae.table<- merge_v(ae.table, part="header")
-
+  ae.table<- add_footer(ae.table,ae.name = "n.pt is the number of patient with at least one event; n.e is the total number of total events",top=FALSE)
+  ae.table<- merge_at(ae.table,j=1:5,part="footer")
   ae.table
 }
 
