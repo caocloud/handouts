@@ -5,16 +5,19 @@
 %%  ~~function to do ... ~~
 }
 \description{
-This gives the summary of all adverse events by two treatment arms. Each represents thenumber of patients in each arm for each specific adverse event and number of total adverse events showed for each adverse event. This table output also gives the fisher exact test between the number of patients in these treatment arms.
+This gives the summary of all events by two treatment arms. Each represents the number of patients in each arm for each specific event and number of total events showed for each event. This table output also gives the fisher exact test between the number of patients in two treatment arms.
 }
 \usage{
-mySummary.ae(ae,arm=as.factor(ae$arm))
+mySummary.ae(ae_fix,arm=as.factor(ae_fix$arm),var=ae$AE,SUBJID="SUBJID",name="ae.name")
 }
 
 \arguments{
   \item{ae:}{the table of adverse event}
 
   \item{arm:}{Treatment arms as factor variables}
+  \item{var:}{List of events wanted to be summarized}
+  \item{SUBJID:}{Name of IDs in the data}
+  \item{name:}{The name of events used in this summary table. It can be adverse event names or others like accident event or blood type...}
 }
 
 \note{
@@ -25,5 +28,5 @@ mySummary.ae(ae,arm=as.factor(ae$arm))
 
 \examples{
 data(ae_fix)
-mySummary.ae(ae_fix,arm=as.factor(ae_fix$arm))
+mySummary.ae(ae_fix,arm=as.factor(ae_fix$arm),var=ae$AE,SUBJID="SUBJID",name="ae.name")
 }
