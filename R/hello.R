@@ -29,7 +29,7 @@ check.packages <- function(x){
 
 ## Adverse event summary
 
-mySummary.ae <- function(ae,arm=as.factor(ae$arm),var=ae$AE,SUBJID="SUBJID"){
+mySummary.ae <- function(ae,arm=as.factor(ae$arm),var=ae$AE,SUBJID="SUBJID", name="something"){
   require(tidyverse)
   require(flextable)
   ae.name<- sort(unique(var))
@@ -74,9 +74,9 @@ mySummary.ae <- function(ae,arm=as.factor(ae$arm),var=ae$AE,SUBJID="SUBJID"){
   ae.table<- align(ae.table, align= "center", part= "all")
 
   # add header
-  ae.table<- set_header_labels(ae.table,Group1.n.pt= paste(gr.lev[1],"(n=",n.1,")",sep=""), Group1.n.e=paste(gr.lev[1],"(n=",n.1,")",sep=""),Group2.n.pt=paste(gr.lev[2],"(n=",n.2,")",sep=""), Group2.n.e=paste(gr.lev[2],"(n=",n.2,")",sep="") )
+  ae.table<- set_header_labels(ae.table,ae.name= name,Group1.n.pt= paste(gr.lev[1],"(n=",n.1,")",sep=""), Group1.n.e=paste(gr.lev[1],"(n=",n.1,")",sep=""),Group2.n.pt=paste(gr.lev[2],"(n=",n.2,")",sep=""), Group2.n.e=paste(gr.lev[2],"(n=",n.2,")",sep="") )
 
-  ae.table<- add_header(ae.table,ae.name="ae.name",Group1.n.pt="n.pt", Group1.n.e="n.ae",Group2.n.pt="n.pt", Group2.n.e="n.ae",p.value="p.value", top=FALSE)
+  ae.table<- add_header(ae.table,ae.name = name,Group1.n.pt="n.pt", Group1.n.e="n.ae",Group2.n.pt="n.pt", Group2.n.e="n.ae",p.value="p.value", top=FALSE)
   
 
   ## merge identical cells
